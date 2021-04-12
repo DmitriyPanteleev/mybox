@@ -2,43 +2,47 @@ package main
 
 import "fmt"
 
+type creatureThings interface {
+	voice() string
+}
+
 type creature struct {
 	species   string
 	move_type string
 }
 
-func (c creature) voice() string {
-	fmt.Println("Primal voice")
-	return ""
-}
-
 type snake struct {
 	creature
-	unic_snake_param string
+	tailBody string
 }
 
-func (s snake) voice() string {
-	fmt.Println("Shhhh....")
-	return ""
+type bird struct {
+	creature
+	wings string
 }
 
 type volf struct {
 	creature
-	volfcolor string
+	fourLegs string
+}
+
+func (c creature) voice() string {
+	return "Primal voice"
+}
+
+func (s snake) voice() string {
+	return "Shhhh...."
 }
 
 func main() {
 	var shusha snake
 	shusha.species = "snake"
 	shusha.move_type = "crawl"
-	shusha.unic_snake_param = "home pet"
-	fmt.Println(shusha.species)
-	fmt.Println(shusha.move_type)
-	fmt.Println(shusha.creature)
+	shusha.tailBody = "green"
+	fmt.Println(shusha)
 	fmt.Println(shusha.voice())
 	// fmt.Println(shusha.creature.voice())
 	var akela volf
-	akela.volfcolor = "brown"
-	fmt.Println(akela.volfcolor)
+	fmt.Println(akela)
 	fmt.Println(akela.voice())
 }
