@@ -1,3 +1,5 @@
+// +build ignore
+
 package main
 
 import (
@@ -13,32 +15,15 @@ func main() {
 	}
 	defer ui.Close()
 
-	x := 0
-	y := 0
-
 	p := widgets.NewParagraph()
-	p.Title = "OrdinaryCave"
-	p.Text = "Scary Cave!"
+	p.Text = "Hello World!"
 	p.SetRect(0, 0, 25, 5)
 
 	ui.Render(p)
 
-	uiEvents := ui.PollEvents()
-	for {
-		e := <-uiEvents
-		switch e.ID {
-		case "q", "<C-c>":
-			return
-		case "<Down>":
-			y = y + 1
-		case "<Up>":
-			y = y - 1
-		case "<Left>":
-			x = x + 1
-		case "<Right>":
-			x = x - 1
+	for e := range ui.PollEvents() {
+		if e.Type == ui.KeyboardEvent {
+			break
 		}
-
-		ui.Render(p)
 	}
 }
