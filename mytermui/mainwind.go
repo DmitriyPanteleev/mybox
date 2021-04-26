@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 
 	ui "github.com/gizak/termui/v3"
@@ -18,7 +19,6 @@ func main() {
 
 	p := widgets.NewParagraph()
 	p.Title = "OrdinaryCave"
-	p.Text = "Scary Cave!"
 	p.SetRect(0, 0, 25, 5)
 
 	ui.Render(p)
@@ -39,6 +39,7 @@ func main() {
 			x = x - 1
 		}
 
+		p.Text = fmt.Sprintf("x = %d, y = %d", x, y)
 		ui.Render(p)
 	}
 }
