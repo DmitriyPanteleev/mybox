@@ -18,6 +18,7 @@ func drawCave(m [][]int) string {
 				s = s + "X"
 			}
 		}
+		s = s + "\n"
 	}
 	return s
 }
@@ -50,13 +51,25 @@ func main() {
 		case "q", "<C-c>":
 			return
 		case "<Down>":
-			y = y + 1
-		case "<Up>":
-			y = y - 1
-		case "<Left>":
 			x = x + 1
-		case "<Right>":
+			if x > 24 {
+				x = 24
+			}
+		case "<Up>":
 			x = x - 1
+			if x < 0 {
+				x = 0
+			}
+		case "<Left>":
+			y = y - 1
+			if y < 0 {
+				y = 0
+			}
+		case "<Right>":
+			y = y + 1
+			if y > 24 {
+				y = 24
+			}
 		}
 
 		cavemap[x][y] = 1
