@@ -1,4 +1,4 @@
-module mybox/mytermui
+module mybox/dtravaler
 
 go 1.16
 
