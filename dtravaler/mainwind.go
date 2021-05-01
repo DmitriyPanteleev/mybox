@@ -7,6 +7,14 @@ import (
 	"github.com/gizak/termui/v3/widgets"
 )
 
+func caveGenerator() [][]int {
+	cavemap := make([][]int, 25)
+	for i := range cavemap {
+		cavemap[i] = make([]int, 50)
+	}
+	return cavemap
+}
+
 func drawCave(m [][]int) string {
 	s := ""
 	for _, row := range m {
@@ -29,50 +37,47 @@ func main() {
 	}
 	defer ui.Close()
 
-	x := 10
 	y := 10
-	cavemap := make([][]int, 25)
-	for i := range cavemap {
-		cavemap[i] = make([]int, 25)
-	}
+	x := 10
+	cavemap := caveGenerator()
 
 	p := widgets.NewParagraph()
 	p.Title = "OrdinaryCave"
-	p.SetRect(0, 0, 27, 27)
+	p.SetRect(0, 0, 52, 27)
 
 	ui.Render(p)
 
 	uiEvents := ui.PollEvents()
 	for {
-		cavemap[x][y] = 0
+		cavemap[y][x] = 0
 
 		e := <-uiEvents
 		switch e.ID {
 		case "q", "<C-c>":
 			return
 		case "<Down>":
-			x = x + 1
-			if x > 24 {
-				x = 24
-			}
-		case "<Up>":
-			x = x - 1
-			if x < 0 {
-				x = 0
-			}
-		case "<Left>":
-			y = y - 1
-			if y < 0 {
-				y = 0
-			}
-		case "<Right>":
 			y = y + 1
 			if y > 24 {
 				y = 24
 			}
+		case "<Up>":
+			y = y - 1
+			if y < 0 {
+				y = 0
+			}
+		case "<Left>":
+			x = x - 1
+			if x < 0 {
+				x = 0
+			}
+		case "<Right>":
+			x = x + 1
+			if x > 49 {
+				x = 49
+			}
 		}
 
-		cavemap[x][y] = 1
+		cavemap[y][x] = 1
 
 		p.Text = drawCave(cavemap)
 		ui.Render(p)
