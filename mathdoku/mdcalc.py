@@ -5,7 +5,8 @@ finalvol = 19
 quantity = 4
 operand = "+"
 intersection = 2
-expt_list = []
+expt_list = [2,1]
+ness_list = [5,3]
 
 def generator (q=3,d=5):
     result =[]
@@ -61,6 +62,19 @@ sorted_result = mdcalc(demenition,finalvol,quantity,operand)
 for item in sorted_result:
     cstop = True
     csum = 0
+
+    for i in expt_list:
+        for j in item:
+            if i == j :
+                cstop = False
+    if ness_list != [] and cstop:
+        for i in ness_list:
+            if i in item:
+                cstop = True
+            else:
+                cstop = False
+                break
+
     for i in range(1,demenition+1):
         ic = item.count(i)
         if ic > intersection:
@@ -69,10 +83,7 @@ for item in sorted_result:
             csum += ic
     if csum > intersection:
         cstop = False
-    for i in expt_list:
-        for j in item:
-            if i == j :
-                cstop = False
+
     if cstop:
         print(item)
 
