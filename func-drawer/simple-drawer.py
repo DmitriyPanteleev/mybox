@@ -3,7 +3,7 @@ from PIL import ImageDraw
 import math
 
 def mfunc(x,y):
-    return (x**2+y**2-320*math.cos(x))**2 - 1440*(x**2+y**2+160*math.sin(y))
+    return 50*math.cos(x)**2 + 50*math.sin(y)**3
 
 sizewidth = 1000
 sizeheight = 1000
