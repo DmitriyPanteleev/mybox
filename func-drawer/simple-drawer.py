@@ -5,8 +5,8 @@ import math
 def mfunc(x,y):
     return (x**2+y**2-320*math.cos(x))**2 - 1440*(x**2+y**2+160*math.sin(y))
 
-sizewidth = 400
-sizeheight = 400
+sizewidth = 1000
+sizeheight = 1000
 
 image = Image.new("RGB", (sizewidth, sizeheight))
 draw = ImageDraw.Draw(image)
@@ -42,4 +42,4 @@ for x in range(sizewidth):
         f1 = f2
         f3 = f4
 
-image.save("/home/dpanteleev/SomeStuff/simpleDraw/empty.png", "PNG")
+image.save("/home/piligrim/SomeStuff/mybox/func-drawer/empty.png", "PNG")
