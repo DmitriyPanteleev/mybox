@@ -5,7 +5,7 @@ import math
 sizewidth = 1000 # size of pictures in pixels
 sizeheight = 1000 # size of pictures in pixels
 formule = "50*math.cos(x)**2 + 50*math.sin(y)**3" # formula of function
-exec_string = "return " + formule
+exec_string = formule
 
 # real area of drawing
 xmin = -100
@@ -16,7 +16,7 @@ ymax = 100
 ylen = abs((ymax-ymin) / sizeheight)
 
 def mfunc(x,y,exec_formule):
-    exec(exec_formule)
+    return eval(exec_formule)
 
 image = Image.new("RGB", (sizewidth, sizeheight))
 draw = ImageDraw.Draw(image)
@@ -43,4 +43,4 @@ for x in range(sizewidth):
         f1 = f2
         f3 = f4
 
-image.save("/home/piligrim/SomeStuff/mybox/func-drawer/empty.png", "PNG")
+image.save("/home/dpanteleev/SomeStuff/mybox/func-drawer/empty.png", "PNG")
