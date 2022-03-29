@@ -2,38 +2,39 @@ from PIL import Image, ImageColor
 from PIL import ImageDraw
 import math
 
-def mfunc(x,y):
-    return 50*math.cos(x)**2 + 50*math.sin(y)**3
+sizewidth = 1000 # size of pictures in pixels
+sizeheight = 1000 # size of pictures in pixels
+formule = "50*math.cos(x)**2 + 50*math.sin(y)**3" # formula of function
+exec_string = "return " + formule
 
-sizewidth = 1000
-sizeheight = 1000
+# real area of drawing
+xmin = -100
+xmax = 100
+xlen = abs((xmax-xmin) / sizewidth)
+ymin = -100
+ymax = 100
+ylen = abs((ymax-ymin) / sizeheight)
+
+def mfunc(x,y,exec_formule):
+    exec(exec_formule)
 
 image = Image.new("RGB", (sizewidth, sizeheight))
 draw = ImageDraw.Draw(image)
 
-xmin = -100
-xmax = 100
-xlen = (xmax-xmin) / sizewidth
-xlen = max(xlen,-xlen)
-ymin = -100
-ymax = 100
-ylen = (ymax-ymin) / sizeheight
-ylen = max(ylen,-ylen)
-
 xr = xmin
 yr = ymin
-f1 = mfunc(xr,yr)
-f2 = mfunc(xr,yr + ylen)
-f3 = mfunc(xr + xlen,yr)
-f4 = mfunc(xr + xlen,yr + ylen)
+f1 = mfunc(xr,yr,exec_string)
+f2 = mfunc(xr,yr + ylen,exec_string)
+f3 = mfunc(xr + xlen,yr,exec_string)
+f4 = mfunc(xr + xlen,yr + ylen,exec_string)
 
 for x in range(sizewidth):
     xr = xmin + x * xlen
     for y in range(sizeheight):
         yr = ymin + y * ylen
 
-        f2 = mfunc(xr,yr + ylen)
-        f4 = mfunc(xr + xlen,yr + ylen)
+        f2 = mfunc(xr,yr + ylen,exec_string)
+        f4 = mfunc(xr + xlen,yr + ylen,exec_string)
 
         if (f1 >= 0 and f2 >= 0 and f3 >= 0 and f3 >= 0) or (f1 <= 0 and f2 <= 0 and f3 <= 0 and f3 <= 0) :
             continue
