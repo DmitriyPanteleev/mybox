@@ -4,7 +4,7 @@ import math
 
 sizewidth = 1000 # size of pictures in pixels
 sizeheight = 1000 # size of pictures in pixels
-formule = "50*math.cos(x)**2 + 50*math.sin(y)**3" # formula of function
+formule = "x**2 + y**2 - 2500" # formula of function
 exec_string = formule
 
 # real area of drawing
@@ -36,7 +36,7 @@ for x in range(sizewidth):
         f2 = mfunc(xr,yr + ylen,exec_string)
         f4 = mfunc(xr + xlen,yr + ylen,exec_string)
 
-        if (f1 >= 0 and f2 >= 0 and f3 >= 0 and f3 >= 0) or (f1 <= 0 and f2 <= 0 and f3 <= 0 and f3 <= 0) :
+        if (f1 > 0 and f2 > 0 and f3 > 0 and f3 > 0) or (f1 < 0 and f2 < 0 and f3 < 0 and f3 < 0) :
             continue
         draw.point((x, y), fill=ImageColor.getrgb("red"))
 
