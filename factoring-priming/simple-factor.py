@@ -30,4 +30,6 @@ def factorization(n):
 
     return factors
 
-print(factorization(823767))
+number = int(input("Enter number: "))
+
+print(factorization(number))
