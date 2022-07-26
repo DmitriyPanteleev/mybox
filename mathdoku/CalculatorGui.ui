@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>632</width>
+    <width>593</width>
     <height>427</height>
    </rect>
   </property>
@@ -17,7 +17,7 @@
    <widget class="QPushButton" name="calcButton">
     <property name="geometry">
      <rect>
-      <x>380</x>
+      <x>350</x>
       <y>360</y>
       <width>221</width>
       <height>34</height>
@@ -30,7 +30,7 @@
    <widget class="QListWidget" name="listWidget">
     <property name="geometry">
      <rect>
-      <x>360</x>
+      <x>330</x>
       <y>10</y>
       <width>256</width>
       <height>341</height>
