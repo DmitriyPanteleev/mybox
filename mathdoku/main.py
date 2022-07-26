@@ -14,11 +14,20 @@ class CalculatorApp(QtWidgets.QMainWindow, CalculatorGui.Ui_MainWindow):
         self.incl_list = []
         self.excl_list = []
         if self.checkBox_1.isChecked():
-            self.incl_list.append('1')
+            if self.checkBox_15.isChecked():
+                self.incl_list = ['conflict']
+            else:
+                self.incl_list.append('1')
         if self.checkBox_4.isChecked():
-            self.incl_list.append('2')
+            if self.checkBox_12.isChecked():
+                self.incl_list = ['conflict']
+            else:
+                self.incl_list.append('2')
         if self.checkBox_6.isChecked():
-            self.incl_list.append('3')
+            if self.checkBox_14.isChecked():
+                self.incl_list = ['conflict']
+            else:
+                self.incl_list.append('3')
         if self.checkBox_2.isChecked():
             self.incl_list.append('4')
         if self.checkBox_3.isChecked():
@@ -50,7 +59,7 @@ class CalculatorApp(QtWidgets.QMainWindow, CalculatorGui.Ui_MainWindow):
             self.excl_list.append('8')
         if self.checkBox_10.isChecked():
             self.excl_list.append('9')        
-        
+
         self.listWidget.clear()
         self.listWidget.addItem(str(self.incl_list))
         self.listWidget.addItem(str(self.excl_list))
