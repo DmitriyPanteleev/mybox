@@ -13,14 +13,14 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(632, 427)
+        MainWindow.resize(593, 427)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.calcButton = QtWidgets.QPushButton(self.centralwidget)
-        self.calcButton.setGeometry(QtCore.QRect(380, 360, 221, 34))
+        self.calcButton.setGeometry(QtCore.QRect(350, 360, 221, 34))
         self.calcButton.setObjectName("calcButton")
         self.listWidget = QtWidgets.QListWidget(self.centralwidget)
-        self.listWidget.setGeometry(QtCore.QRect(360, 10, 256, 341))
+        self.listWidget.setGeometry(QtCore.QRect(330, 10, 256, 341))
         self.listWidget.setObjectName("listWidget")
         self.groupBox = QtWidgets.QGroupBox(self.centralwidget)
         self.groupBox.setGeometry(QtCore.QRect(20, 270, 131, 121))
