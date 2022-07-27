@@ -104,6 +104,11 @@ class CalculatorApp(QtWidgets.QMainWindow, CalculatorGui.Ui_MainWindow):
         self.calcButton.clicked.connect(self.button_pushed)
 
     def button_pushed(self):
+        self.demenition = self.comboBox.currentText()
+        self.finalvol = self.lineEdit_2.text()
+        self.quantity = self.lineEdit.text()
+        self.operand = self.comboBox_2.currentText()
+        self.intersection = self.comboBox_3.currentText()
         self.incl_list = []
         self.excl_list = []
         if self.checkBox_1.isChecked():
@@ -145,8 +150,13 @@ class CalculatorApp(QtWidgets.QMainWindow, CalculatorGui.Ui_MainWindow):
             self.excl_list.append('9')
 
         self.listWidget.clear()
-        self.listWidget.addItem(str(self.incl_list))
+        self.listWidget.addItem(str(self.demenition))
+        self.listWidget.addItem(str(self.operand))
+        self.listWidget.addItem(str(self.intersection))
+        self.listWidget.addItem(str(self.quantity))
+        self.listWidget.addItem(str(self.finalvol))
         self.listWidget.addItem(str(self.excl_list))
+        self.listWidget.addItem(str(self.incl_list))
 
 def main():
     app = QtWidgets.QApplication(sys.argv)  # Новый экземпляр QApplication
