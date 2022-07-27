@@ -3,6 +3,7 @@ import sys  # sys нужен для передачи argv в QApplication
 from PyQt5 import QtWidgets
 
 import CalculatorGui
+import mdcalc
 
 class CalculatorApp(QtWidgets.QMainWindow, CalculatorGui.Ui_MainWindow):
     def __init__(self):
@@ -104,11 +105,11 @@ class CalculatorApp(QtWidgets.QMainWindow, CalculatorGui.Ui_MainWindow):
         self.calcButton.clicked.connect(self.button_pushed)
 
     def button_pushed(self):
-        self.demenition = self.comboBox.currentText()
-        self.finalvol = self.lineEdit_2.text()
-        self.quantity = self.lineEdit.text()
+        self.demenition = int(self.comboBox.currentText())
+        self.finalvol = int(self.lineEdit_2.text())
+        self.quantity = int(self.lineEdit.text())
         self.operand = self.comboBox_2.currentText()
-        self.intersection = self.comboBox_3.currentText()
+        self.intersection = int(self.comboBox_3.currentText())
         self.incl_list = []
         self.excl_list = []
         if self.checkBox_1.isChecked():
@@ -149,14 +150,12 @@ class CalculatorApp(QtWidgets.QMainWindow, CalculatorGui.Ui_MainWindow):
         if self.checkBox_10.isChecked():
             self.excl_list.append('9')
 
+        sorted_result = mdcalc.mdcalc(self.demenition,self.finalvol,self.quantity,self.operand)
+        real_result = mdcalc.cleaning(sorted_result,self.incl_list,self.excl_list,self.demenition,self.intersection)
+        
         self.listWidget.clear()
-        self.listWidget.addItem(str(self.demenition))
-        self.listWidget.addItem(str(self.operand))
-        self.listWidget.addItem(str(self.intersection))
-        self.listWidget.addItem(str(self.quantity))
-        self.listWidget.addItem(str(self.finalvol))
-        self.listWidget.addItem(str(self.excl_list))
-        self.listWidget.addItem(str(self.incl_list))
+        for item in real_result:
+            self.listWidget.addItem(str(item))
 
 def main():
     app = QtWidgets.QApplication(sys.argv)  # Новый экземпляр QApplication

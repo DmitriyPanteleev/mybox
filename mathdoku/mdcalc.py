@@ -1,13 +1,5 @@
 #!/usr/bin/env python
 
-demenition = 7
-finalvol = 19
-quantity = 4
-operand = "+"
-intersection = 2
-expt_list = [2,1]
-ness_list = [5,3]
-
 def generator (q=3,d=5):
     result =[]
     for j in range(q):
@@ -56,35 +48,53 @@ def mdcalc (d,f,q,op):
 
     return [list(tupl) for tupl in {tuple(item) for item in gres }]
 
-sorted_result = mdcalc(demenition,finalvol,quantity,operand)
+def cleaning(sorted_result, ness_list, expt_list, demenition, intersection):
+    # Intersection checking
 
-# Intersection checking
-for item in sorted_result:
-    cstop = True
-    csum = 0
+    res_list = []
+    for item in sorted_result:
+        cstop = True
+        csum = 0
 
-    for i in expt_list:
-        for j in item:
-            if i == j :
+        for i in expt_list:
+            for j in item:
+                if i == j :
+                    cstop = False
+        if ness_list != [] and cstop:
+            for i in ness_list:
+                if i in item:
+                    cstop = True
+                else:
+                    cstop = False
+                    break
+
+        for i in range(1,demenition+1):
+            ic = item.count(i)
+            if ic > intersection:
                 cstop = False
-    if ness_list != [] and cstop:
-        for i in ness_list:
-            if i in item:
-                cstop = True
-            else:
-                cstop = False
-                break
-
-    for i in range(1,demenition+1):
-        ic = item.count(i)
-        if ic > intersection:
+            if ic > 1 and ic <= intersection:
+                csum += ic
+        if csum > intersection:
             cstop = False
-        if ic > 1 and ic <= intersection:
-            csum += ic
-    if csum > intersection:
-        cstop = False
 
-    if cstop:
-        print(item)
+        if cstop:
+            res_list.append(item)
 
-# print(sorted_result)
+    return res_list
+
+
+if __name__ == '__main__':
+
+    demenition = 7
+    finalvol = 19
+    quantity = 4
+    operand = "+"
+    intersection = 2
+    expt_list = [2,1]
+    ness_list = [5,3]
+    
+    sorted_result = mdcalc(demenition,finalvol,quantity,operand)
+
+    real_result = cleaning(sorted_result,ness_list,expt_list,demenition,intersection)
+
+    print(real_result)
