@@ -52,6 +52,7 @@ def cleaning(sorted_result, ness_list, expt_list, demenition, intersection):
     # Intersection checking
 
     res_list = []
+
     for item in sorted_result:
         cstop = True
         csum = 0
