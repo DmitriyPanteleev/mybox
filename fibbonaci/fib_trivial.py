@@ -19,7 +19,7 @@ def fib(n):
     return f
 
 @ti.kernel
-def fibbonacci(n: int) -> int:
+def fibbonacci(n: int) -> ti.i64:
     p = fib(n)
     return p
 
