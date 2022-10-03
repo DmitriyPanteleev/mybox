@@ -2,7 +2,11 @@
 # Count the number of primes in range [1, n].
 
 import time
+from tokenize import Double
+import taichi as ti
+ti.init(default_ip=ti.i64)
 
+@ti.func
 def fib(n):
     f1 = 0
     f2 = 1
@@ -13,6 +17,7 @@ def fib(n):
         f1 = f
     return f
 
+@ti.kernel
 def fibbonacci(n: int) -> int:
     p = fib(n)
     return p
