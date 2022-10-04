@@ -1,31 +1,24 @@
-#!/usr/bin/env python
-# Count the number of primes in range [1, n].
-
-import time
-from tokenize import Double
 import taichi as ti
-ti.init(default_ip=ti.i64)
+import time
+import random
 
-@ti.func
-def fib(n):
-    f1 = 0
-    f2 = 1
-    f = 1
+ti.init(arch=ti.cpu)
+
+@ti.kernel
+def fib(n: ti.i64) -> ti.i64:
+    f1: ti.i64 = 0
+    f2: ti.i64 = 1
+    f: ti.i64 = 1
     for i in range(n):
-        f = f1 + f2
+        f = min(1000000000, f1 + f2) - random.randint(100, 1000000)
         f2 = f1
         f1 = f
     return f
 
-@ti.kernel
-def fibbonacci(n: int) -> int:
-    p = fib(n)
-    return p
-
-number = int(input("Enter number: "))
+number = 40
 
 tic = time.perf_counter()
-print(fibbonacci(number))
+res = fib(number)
 toc = time.perf_counter()
-
+print(res)
 print(f"Execution time {toc - tic:0.4f} seconds")
