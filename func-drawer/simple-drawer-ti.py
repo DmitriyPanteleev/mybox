@@ -12,9 +12,14 @@ image = Image.new("RGB", (sizewidth, sizeheight))
 draw = ImageDraw.Draw(image)
 
 @ti.func
+def draw_grafic(x,y):
+    draw.point((x, y), fill=ImageColor.getrgb("red"))
+
+@ti.func
 def mfunc(x,y):
     # formula of function
     return x**2 + y**2 - 2500
+
 @ti.kernel
 def calc():
     sizewidth = 1000 # size of pictures in pixels
@@ -45,14 +50,13 @@ def calc():
 
             if (f1 > 0 and f2 > 0 and f3 > 0 and f3 > 0) or (f1 < 0 and f2 < 0 and f3 < 0 and f3 < 0) :
                 continue
-            # draw.point((x, y), fill=ImageColor.getrgb("red"))
+            draw_grafic(x,y)
 
             f1 = f2
             f3 = f4
 
-    # image.save("/home/dpanteleev/SomeStuff/mybox/func-drawer/empty.png", "PNG")
-
 tic = time.perf_counter()
 calc()
+image.save("/home/dpanteleev/SomeStuff/mybox/func-drawer/empty.png", "PNG")
 toc = time.perf_counter()
 print(f"Execution time {toc - tic:0.4f} seconds")
