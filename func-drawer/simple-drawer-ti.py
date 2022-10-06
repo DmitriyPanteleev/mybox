@@ -1,6 +1,8 @@
+from re import S
 from PIL import Image, ImageColor
 from PIL import ImageDraw
 import math
+import numpy as np
 import time
 import taichi as ti
 ti.init()
@@ -8,22 +10,16 @@ ti.init()
 sizewidth = 1000 # size of pictures in pixels
 sizeheight = 1000 # size of pictures in pixels
 
-image = Image.new("RGB", (sizewidth, sizeheight))
-draw = ImageDraw.Draw(image)
-
-@ti.func
-def draw_grafic(x,y):
-    draw.point((x, y), fill=ImageColor.getrgb("red"))
-
 @ti.func
 def mfunc(x,y):
     # formula of function
     return x**2 + y**2 - 2500
 
 @ti.kernel
-def calc():
+def calc() -> ti.types.ndarray():
     sizewidth = 1000 # size of pictures in pixels
     sizeheight = 1000 # size of pictures in pixels
+    s = np.zeros(sizewidth,sizeheight)
 
     # real area of drawing
     xmin = -100
@@ -50,13 +46,13 @@ def calc():
 
             if (f1 > 0 and f2 > 0 and f3 > 0 and f3 > 0) or (f1 < 0 and f2 < 0 and f3 < 0 and f3 < 0) :
                 continue
-            draw_grafic(x,y)
+            s[x][y] = 1
 
             f1 = f2
             f3 = f4
+    return s
 
 tic = time.perf_counter()
 calc()
-image.save("/home/dpanteleev/SomeStuff/mybox/func-drawer/empty.png", "PNG")
 toc = time.perf_counter()
 print(f"Execution time {toc - tic:0.4f} seconds")
