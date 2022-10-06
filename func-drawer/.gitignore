@@ -1,0 +1,8 @@
+#
+# Python Garbage Files
+#
+
+__pycache__/
+*.py[cod]
+*$py.class
+*.png
