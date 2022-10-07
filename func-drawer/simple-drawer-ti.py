@@ -16,10 +16,10 @@ def mfunc(x,y):
     return x**2 + y**2 - 2500
 
 @ti.kernel
-def calc() -> ti.types.ndarray():
+def calc() -> list:
     sizewidth = 1000 # size of pictures in pixels
     sizeheight = 1000 # size of pictures in pixels
-    s = np.zeros(sizewidth,sizeheight)
+    s = [[0 for i in range(sizewidth)] for j in range(sizeheight)]
 
     # real area of drawing
     xmin = -100
@@ -45,6 +45,7 @@ def calc() -> ti.types.ndarray():
             f4 = mfunc(xr + xlen,yr + ylen)
 
             if (f1 > 0 and f2 > 0 and f3 > 0 and f3 > 0) or (f1 < 0 and f2 < 0 and f3 < 0 and f3 < 0) :
+                s[x][y] = 0
                 continue
             s[x][y] = 1
 
