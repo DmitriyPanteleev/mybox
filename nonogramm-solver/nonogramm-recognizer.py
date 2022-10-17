@@ -13,7 +13,7 @@ args = vars(ap.parse_args())
 
 # ocr-ing
 reader = easyocr.Reader(['en'])
-result = reader.readtext(args["image"])
+result = reader.readtext(args["image"], allowlist='0123456789', detail=0)
 
 # result
 pprint(result)
