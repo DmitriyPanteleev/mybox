@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 
 def plot(image,cmap=None):
     plt.figure(figsize=(15,15))
-    plt.imshow(image,cmap=cmap) 
+    plt.savefig(image) 
 
 def imshow_components(labels):
     ### creating a hsv image, with a unique hue value for each label
@@ -59,8 +59,8 @@ for x,y,w,h,area in stats[2:]:
     cv2.rectangle(image,(x,y),(x+w,y+h),(0,255,0),1)
 
 if plot_flag:
-    plot(cc_out)
-    plot(image) 
+    plot("./m_cc_out.png")
+    plot("./mimage.png") 
 
 # result
 pprint(result)
