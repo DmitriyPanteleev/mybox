@@ -1,4 +1,4 @@
-from textual import App, ComposeResult
+from textual.app import App, ComposeResult
 from textual.containers import ScrollableContainer
 from textual.widgets import Header, Footer, Button, Static
 
