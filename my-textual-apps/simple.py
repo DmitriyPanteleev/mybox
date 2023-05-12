@@ -1,24 +1,39 @@
 from textual.app import App, ComposeResult
-from textual.color import Color
 from textual.widgets import Static
 
 
-class ColorApp(App):
+TEXT = """I must not fear.
+Fear is the mind-killer.
+Fear is the little-death that brings total obliteration.
+I will face my fear.
+I will permit it to pass over me and through me.
+And when it has gone past, I will turn the inner eye to see its path.
+Where the fear has gone there will be nothing. Only I will remain."""
+
+
+class BoxSizing(App):
     def compose(self) -> ComposeResult:
-        self.widget1 = Static("Textual One")
+        self.widget1 = Static(TEXT)
         yield self.widget1
-        self.widget2 = Static("Textual Two")
+        self.widget2 = Static(TEXT)
         yield self.widget2
-        self.widget3 = Static("Textual Three")
-        yield self.widget3
 
     def on_mount(self) -> None:
-        self.widget1.styles.background = "#9932CC"
-        self.widget2.styles.background = "hsl(150,42.9%,49.4%)"
-        self.widget2.styles.color = "blue"
-        self.widget3.styles.background = Color(191, 78, 96)
+        self.widget1.styles.background = "purple"
+        self.widget2.styles.background = "darkgreen"
+        self.widget1.styles.width = 30
+        self.widget2.styles.width = 30
+        self.widget1.styles.height = 6
+        self.widget2.styles.height = 6
+        self.widget1.styles.border = ("heavy", "white")
+        self.widget2.styles.border = ("heavy", "white")
+        self.widget1.styles.padding = 1
+        self.widget2.styles.padding = 1
+        self.widget2.styles.box_sizing = "content-box"
+        self.widget1.styles.margin = 2
+        self.widget2.styles.margin = 2
 
 
 if __name__ == "__main__":
-    app = ColorApp()
+    app = BoxSizing()
     app.run()
