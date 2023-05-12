@@ -21,18 +21,14 @@ class BoxSizing(App):
     def on_mount(self) -> None:
         self.widget1.styles.background = "purple"
         self.widget2.styles.background = "darkgreen"
-        self.widget1.styles.width = 30
-        self.widget2.styles.width = 30
-        self.widget1.styles.height = 6
-        self.widget2.styles.height = 6
-        self.widget1.styles.border = ("heavy", "white")
-        self.widget2.styles.border = ("heavy", "white")
-        self.widget1.styles.padding = 1
-        self.widget2.styles.padding = 1
-        self.widget2.styles.box_sizing = "content-box"
-        self.widget1.styles.margin = 2
-        self.widget2.styles.margin = 2
-
+        self.widget1.styles.height = "50%"
+        self.widget2.styles.height = "30%"
+        self.widget1.styles.border = ("round", "white")
+        self.widget2.styles.border = ("round", "white")
+        self.widget1.border_title = "Map"
+        self.widget2.border_title = "Information"
+        self.widget1.styles.border_title_align = "center"
+        self.widget2.styles.border_title_align = "left"
 
 if __name__ == "__main__":
     app = BoxSizing()
