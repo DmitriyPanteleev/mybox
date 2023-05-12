@@ -1,20 +1,17 @@
 from textual.app import App, ComposeResult
-from textual.widgets import Label, Button
+from textual.widgets import Static
 
 
-class QuestionApp(App[str]):
-    CSS_PATH = "simple.css"
-
+class WidgetApp(App):
     def compose(self) -> ComposeResult:
-        yield Label("Do you love Textual?", id="question")
-        yield Button("Yes", id="yes", variant="primary")
-        yield Button("No", id="no", variant="error")
+        self.widget = Static("Textual")
+        yield self.widget
 
-    def on_button_pressed(self, event: Button.Pressed) -> None:
-        self.exit(event.button.id)
+    def on_mount(self) -> None:
+        self.widget.styles.background = "darkblue"
+        self.widget.styles.border = ("heavy", "white")
 
 
 if __name__ == "__main__":
-    app = QuestionApp()
-    reply = app.run()
-    print(reply)
+    app = WidgetApp()
+    app.run()
