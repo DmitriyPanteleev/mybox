@@ -1,18 +1,28 @@
-Screen {
-    layout: grid;
-    grid-size: 2;
-    grid-gutter: 2; 
-    padding: 2;   
+/* The top level dialog (a Container) */
+#dialog {
+    height: 100%;
+    margin: 4 8;
+    background: $panel;
+    color: $text;
+    border: tall $background;
+    padding: 1 2;
 }
 
-#question {
-    width: 100%;
-    height: 100%;
-    column-span: 2;
-    content-align: center bottom;
-    text-style: bold;
-} 
-
+/* The button class */
 Button {
-    width: 100%;
+    width: 1fr;
+}
+
+/* Matches the question text */
+.question {
+    text-style: bold;
+    height: 100%;
+    content-align: center middle;
+}
+
+/* Matches the button container */
+.buttons {
+    width: auto;
+    height: auto;
+    dock: bottom;
 }
