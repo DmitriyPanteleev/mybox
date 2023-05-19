@@ -1,3 +1,7 @@
+$panel: #333;
+$background: #000;
+$text: #fff;
+
 /* The top level dialog (a Container) */
 #dialog {
     height: 100%;
