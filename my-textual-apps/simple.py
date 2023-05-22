@@ -2,7 +2,7 @@ from textual.app import App, ComposeResult
 from textual.widgets import Static
 
 
-class VerticalLayoutExample(App):
+class LayoutExample(App):
     CSS_PATH = "simple.css"
 
     def compose(self) -> ComposeResult:
@@ -12,5 +12,5 @@ class VerticalLayoutExample(App):
 
 
 if __name__ == "__main__":
-    app = VerticalLayoutExample()
+    app = LayoutExample()
     app.run()
