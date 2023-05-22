@@ -1,27 +1,16 @@
 from textual.app import App, ComposeResult
-from textual.containers import Container, Horizontal
-from textual.widgets import Button, Footer, Header, Static
+from textual.widgets import Static
 
-QUESTION = "Do you want to learn about Textual CSS?"
 
-class ExampleApp(App):
-
+class VerticalLayoutExample(App):
     CSS_PATH = "simple.css"
 
     def compose(self) -> ComposeResult:
-        yield Header()
-        yield Footer()
-        yield Container(
-            Static(QUESTION, classes="question"),
-            Horizontal(
-                Button("Yes", variant="success"),
-                Button("No", variant="error"),
-                classes="buttons",
-            ),
-            id="dialog",
-        )
+        yield Static("One", classes="box")
+        yield Static("Two", classes="box")
+        yield Static("Three", classes="box")
 
 
 if __name__ == "__main__":
-    app = ExampleApp()
+    app = VerticalLayoutExample()
     app.run()
