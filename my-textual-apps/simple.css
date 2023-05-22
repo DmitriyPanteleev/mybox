@@ -1,5 +1,6 @@
 Screen {
     layout: horizontal;
+    overflow-x: auto;
 }
 
 .box {
