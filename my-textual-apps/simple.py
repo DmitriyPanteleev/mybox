@@ -7,18 +7,13 @@ class LayoutExample(App):
     CSS_PATH = "simple.css"
 
     def compose(self) -> ComposeResult:
-        yield Horizontal(
-            Vertical(
-                Static("One", classes="box"),
-                Static("Two", classes="box"),
-                classes="column",
-            ),
-            Vertical(
-                Static("Three"),
-                Static("Four"),
-                classes="column",
-            ),
-        )
+        with Horizontal():
+            with Vertical(classes="column"):
+                yield Static("One")
+                yield Static("Two")
+            with Vertical(classes="column"):
+                yield Static("Three")
+                yield Static("Four")
 
 if __name__ == "__main__":
     app = LayoutExample()
