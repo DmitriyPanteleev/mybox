@@ -1,8 +1,9 @@
 Screen {
-    layout: vertical;
+    layout: horizontal;
 }
 
 .box {
-    height: 1fr;
+    height: 100%;
+    width: 1fr;
     border: solid green;
 }
