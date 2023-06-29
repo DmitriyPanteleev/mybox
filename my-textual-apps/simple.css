@@ -7,6 +7,7 @@ Screen {
 
 #two {
     column-span: 2;
+    row-span: 2;
     tint: magenta 30%;
 }
 
