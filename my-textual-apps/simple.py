@@ -9,7 +9,7 @@ class LayoutExample(App):
 
     def compose(self) -> ComposeResult:
         yield Static("One", classes="box")
-        yield Static("Two [b](column-span: 2 and row-span: 2)", classes="box", id="two")
+        yield Static("Two", classes="box")
         yield Static("Three", classes="box")
         yield Static("Four", classes="box")
         yield Static("Five", classes="box")

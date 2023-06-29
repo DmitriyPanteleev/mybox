@@ -1,17 +1,11 @@
 Screen {
     layout: grid;
     grid-size: 3;
-    grid-columns: 2fr 1fr 1fr;
-    grid-rows: 30% 70%;
-}
-
-#two {
-    column-span: 2;
-    row-span: 2;
-    tint: magenta 30%;
+    grid-gutter: 1;
+    background: lightgreen;
 }
 
 .box {
+    background: darkmagenta;
     height: 100%;
-    border: solid green;
 }
