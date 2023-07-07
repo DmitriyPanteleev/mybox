@@ -1,20 +1,23 @@
-#!/usr/bin/env python3
-
 from textual.app import App, ComposeResult
-from textual.widgets import Static
+from textual.widgets import Header, Static
+
+TEXT = """\
+Docking a widget removes it from the layout and fixes its position, aligned to either the top, right, bottom, or left edges of a container.
+
+Docked widgets will not scroll out of view, making them ideal for sticky headers, footers, and sidebars.
+
+"""
 
 
-class LayoutExample(App):
+class DockLayoutExample(App):
     CSS_PATH = "simple.css"
 
     def compose(self) -> ComposeResult:
-        yield Static("One", classes="box")
-        yield Static("Two", classes="box")
-        yield Static("Three", classes="box")
-        yield Static("Four", classes="box")
-        yield Static("Five", classes="box")
-        yield Static("Six", classes="box")
+        yield Header(id="header")
+        yield Static("Sidebar1", id="sidebar")
+        yield Static(TEXT * 10, id="body")
+
 
 if __name__ == "__main__":
-    app = LayoutExample()
+    app = DockLayoutExample()
     app.run()
