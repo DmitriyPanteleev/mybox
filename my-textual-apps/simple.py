@@ -1,30 +1,48 @@
 from textual.app import App, ComposeResult
-from textual.containers import Container, Horizontal, VerticalScroll
-from textual.widgets import Header, Static
+from textual.color import Color
+from textual.message import Message
+from textual.widgets import Static
 
 
-class CombiningLayoutsExample(App):
-    CSS_PATH = "simple.css"
+class ColorButton(Static):
+    """A color button."""
 
+    class Selected(Message):
+        """Color selected message."""
+
+        def __init__(self, color: Color) -> None:
+            self.color = color
+            super().__init__()
+
+    def __init__(self, color: Color) -> None:
+        self.color = color
+        super().__init__()
+
+    def on_mount(self) -> None:
+        self.styles.margin = (1, 2)
+        self.styles.content_align = ("center", "middle")
+        self.styles.background = Color.parse("#ffffff33")
+        self.styles.border = ("tall", self.color)
+
+    def on_click(self) -> None:
+        # The post_message method sends an event to be handled in the DOM
+        self.post_message(self.Selected(self.color))
+
+    def render(self) -> str:
+        return str(self.color)
+
+
+class ColorApp(App):
     def compose(self) -> ComposeResult:
-        yield Header()
-        with Container(id="app-grid"):
-            with VerticalScroll(id="left-pane"):
-                for number in range(15):
-                    yield Static(f"Vertical layout, child {number}")
-            with Horizontal(id="top-right"):
-                yield Static("Horizontally")
-                yield Static("Positioned")
-                yield Static("Children")
-                yield Static("Here")
-            with Container(id="bottom-right"):
-                yield Static("This")
-                yield Static("panel")
-                yield Static("is")
-                yield Static("using")
-                yield Static("grid layout!", id="bottom-right-final")
+        yield ColorButton(Color.parse("#008080"))
+        yield ColorButton(Color.parse("#808000"))
+        yield ColorButton(Color.parse("#E9967A"))
+        yield ColorButton(Color.parse("#121212"))
+
+    def on_color_button_selected(self, message: ColorButton.Selected) -> None:
+        self.screen.styles.animate("background", message.color, duration=0.5)
 
 
 if __name__ == "__main__":
-    app = CombiningLayoutsExample()
+    app = ColorApp()
     app.run()
