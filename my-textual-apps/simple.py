@@ -1,26 +1,27 @@
+from textual import on
 from textual.app import App, ComposeResult
-from textual.containers import Horizontal
-from textual.widgets import Button, Input
+from textual.widgets import Button
 
 
-class PreventApp(App):
-    """Demonstrates `prevent` context manager."""
+class OnDecoratorApp(App):
+    CSS_PATH = "simple.css"
 
     def compose(self) -> ComposeResult:
-        yield Input()
-        yield Button("Clear", id="clear")
+        """Three buttons."""
+        yield Button("Bell", id="bell")
+        yield Button("Toggle dark", classes="toggle dark")
+        yield Button("Quit", id="quit")
 
-    def on_button_pressed(self) -> None:
-        """Clear the text input."""
-        input = self.query_one(Input)
-        with input.prevent(Input.Changed):  
-            input.value = ""
-
-    def on_input_changed(self) -> None:
-        """Called as the user types."""
-        self.bell()  
+    def on_button_pressed(self, event: Button.Pressed) -> None:  
+        """Handle all button pressed events."""
+        if event.button.id == "bell":
+            self.bell()
+        elif event.button.has_class("toggle", "dark"):
+            self.dark = not self.dark
+        elif event.button.id == "quit":
+            self.exit()
 
 
 if __name__ == "__main__":
-    app = PreventApp()
+    app = OnDecoratorApp()
     app.run()
