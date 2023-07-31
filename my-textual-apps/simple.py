@@ -1,33 +1,45 @@
-from textual import on
+import asyncio
+
+try:
+    import httpx
+except ImportError:
+    raise ImportError("Please install httpx with 'pip install httpx' ")
+
+from rich.json import JSON
+
 from textual.app import App, ComposeResult
-from textual.widgets import Button
+from textual.containers import VerticalScroll
+from textual.widgets import Input, Static
 
 
-class OnDecoratorApp(App):
+class DictionaryApp(App):
+    """Searches a dictionary API as-you-type."""
+
     CSS_PATH = "simple.css"
 
     def compose(self) -> ComposeResult:
-        """Three buttons."""
-        yield Button("Bell", id="bell")
-        yield Button("Toggle dark", classes="toggle dark")
-        yield Button("Quit", id="quit")
+        yield Input(placeholder="Search for a word")
+        yield VerticalScroll(Static(id="results"), id="results-container")
 
-    @on(Button.Pressed, "#bell")  
-    def play_bell(self):
-        """Called when the bell button is pressed."""
-        self.bell()
+    async def on_input_changed(self, message: Input.Changed) -> None:
+        """A coroutine to handle a text changed message."""
+        if message.value:
+            # Look up the word in the background
+            asyncio.create_task(self.lookup_word(message.value))
+        else:
+            # Clear the results
+            self.query_one("#results", Static).update()
 
-    @on(Button.Pressed, ".toggle.dark")  
-    def toggle_dark(self):
-        """Called when the 'toggle dark' button is pressed."""
-        self.dark = not self.dark
+    async def lookup_word(self, word: str) -> None:
+        """Looks up a word."""
+        url = f"https://api.dictionaryapi.dev/api/v2/entries/en/{word}"
+        async with httpx.AsyncClient() as client:
+            results = (await client.get(url)).text
 
-    @on(Button.Pressed, "#quit")  
-    def quit(self):
-        """Called when the quit button is pressed."""
-        self.exit()
+        if word == self.query_one(Input).value:
+            self.query_one("#results", Static).update(JSON(results))
 
 
 if __name__ == "__main__":
-    app = OnDecoratorApp()
+    app = DictionaryApp()
     app.run()
