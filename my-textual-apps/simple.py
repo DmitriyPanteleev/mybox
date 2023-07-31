@@ -12,14 +12,20 @@ class OnDecoratorApp(App):
         yield Button("Toggle dark", classes="toggle dark")
         yield Button("Quit", id="quit")
 
-    def on_button_pressed(self, event: Button.Pressed) -> None:  
-        """Handle all button pressed events."""
-        if event.button.id == "bell":
-            self.bell()
-        elif event.button.has_class("toggle", "dark"):
-            self.dark = not self.dark
-        elif event.button.id == "quit":
-            self.exit()
+    @on(Button.Pressed, "#bell")  
+    def play_bell(self):
+        """Called when the bell button is pressed."""
+        self.bell()
+
+    @on(Button.Pressed, ".toggle.dark")  
+    def toggle_dark(self):
+        """Called when the 'toggle dark' button is pressed."""
+        self.dark = not self.dark
+
+    @on(Button.Pressed, "#quit")  
+    def quit(self):
+        """Called when the quit button is pressed."""
+        self.exit()
 
 
 if __name__ == "__main__":
