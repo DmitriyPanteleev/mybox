@@ -1,10 +1,10 @@
-#!/bin/python3
+import asyncio
+from rich import print
+from rich.panel import Panel
 
-from textual.app import App
-from textual.widgets import Placeholder
+def render_box():
+    print(Panel("Hello, World!", style="blue on white"))
 
-class MyApp(App):
-    async def on_mount(self, event):
-        await self.view.dock(Placeholder(), edge="top")
-
-MyApp.run(log="textual.log")
+loop = asyncio.get_event_loop()
+loop.run_in_executor(None, render_box)
+loop.run_forever()
