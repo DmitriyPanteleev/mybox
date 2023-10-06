@@ -1,10 +1,12 @@
-import asyncio
 from rich import print
 from rich.panel import Panel
+from rich.text import Text
 
-def render_box():
-    print(Panel("Hello, World!", style="blue on white"))
+# Создаем текст, который хотим поместить в рамку
+text = Text("Hello, World!", justify="center")
 
-loop = asyncio.get_event_loop()
-loop.run_in_executor(None, render_box)
-loop.run_forever()
+# Создаем панель (рамку) вокруг текста со скругленными углами
+panel = Panel(text, border_style="blue", padding=(1, 2), expand=False)
+
+# Выводим панель в консоль
+print(panel)
