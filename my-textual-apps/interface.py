@@ -1,12 +1,24 @@
-from rich import print
-from rich.panel import Panel
-from rich.text import Text
+import textual.app
+from textual.widget import Widget
+from textual.widgets import Static
 
-# Создаем текст, который хотим поместить в рамку
-text = Text("Hello, World!", justify="center")
+class MyApp(textual.app.App):
 
-# Создаем панель (рамку) вокруг текста со скругленными углами
-panel = Panel(text, border_style="blue", padding=(1, 2), expand=False)
+    async def on_load(self) -> None:
+        self.bind("b", self.action_view)  # Corrected line
 
-# Выводим панель в консоль
-print(panel)
+    async def on_mount(self) -> None:
+        self.canvas = Static()
+
+    async def action_view(self) -> None:
+        width, height = self.screen.size
+
+        self.canvas.update(
+            "<roundrect x='0' y='0' height='{height}' width='{width}' rx='20' ry='20' fill='none' stroke='black' stroke-width='2' />".format(
+                width=width,
+                height=int(height * 2 / 3)
+            )
+        )
+
+app = MyApp()
+app.run()
