@@ -1,24 +1,26 @@
-import textual.app
-from textual.widget import Widget
+import os
+from textual.app import App, ComposeResult
+from textual.containers import Container
 from textual.widgets import Static
 
-class MyApp(textual.app.App):
+def get_terminal_size():
+    rows, columns = os.popen('stty size', 'r').read().split()
+    return int(rows), int(columns)
 
-    async def on_load(self) -> None:
-        self.bind("b", self.action_view)  # Corrected line
+class MyApp(App):
+    CSS_PATH = "simple.css"
 
-    async def on_mount(self) -> None:
-        self.canvas = Static()
-
-    async def action_view(self) -> None:
-        width, height = self.screen.size
-
-        self.canvas.update(
-            "<roundrect x='0' y='0' height='{height}' width='{width}' rx='20' ry='20' fill='none' stroke='black' stroke-width='2' />".format(
-                width=width,
-                height=int(height * 2 / 3)
-            )
+    def compose(self) -> ComposeResult:
+        rows, columns = get_terminal_size()
+        yield Container(
+            Static("Hello, World!", classes="panel"),
+            classes="panel-container",
         )
 
-app = MyApp()
-app.run()
+    def on_mount(self) -> None:
+        self.query_one(".panel-container").styles.width = str(get_terminal_size()[1])
+        self.query_one(".panel-container").styles.height = str(int(get_terminal_size()[0] * 2/3))
+
+if __name__ == "__main__":
+    app = MyApp()
+    app.run()
