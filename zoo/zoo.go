@@ -43,6 +43,9 @@ func main() {
 	fmt.Println(shusha.voice())
 	// fmt.Println(shusha.creature.voice())
 	var akela volf
+	akela.species = "volf"
+	akela.move_type = "run"
+	akela.fourLegs = "grey"
 	fmt.Println(akela)
 	fmt.Println(akela.voice())
 }
