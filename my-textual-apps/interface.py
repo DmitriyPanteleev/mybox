@@ -11,6 +11,7 @@ class CenterApp(App):
 
     #map {
         border: round white;
+        border-title-align: left;
         text-align: left;
         content-align: left top;
         width: 100%;
@@ -19,6 +20,7 @@ class CenterApp(App):
 
     #params {
         border: round white;
+        border-title-align: right;
         text-align: center;
         content-align: center middle;
         width: 100%;
@@ -27,8 +29,12 @@ class CenterApp(App):
     """
 
     def compose(self) -> ComposeResult:
-        yield Static("Map", title="Map", id="map")
-        yield Static("Parameters", id="params")
+        mapscreen = Static(id="map")
+        mapscreen.border_title = "Map"
+        paramscreen = Static(id="params")
+        paramscreen.border_title = "Parameters"
+        yield mapscreen
+        yield paramscreen
 
 if __name__ == "__main__":
     app = CenterApp()
