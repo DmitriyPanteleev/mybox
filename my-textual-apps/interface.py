@@ -1,7 +1,6 @@
 from textual.app import App, ComposeResult
 from textual.widgets import Static
 
-
 class CenterApp(App):
     """How to center things."""
 
@@ -15,7 +14,7 @@ class CenterApp(App):
         text-align: center;
         content-align: center middle;
         width: 100%;
-        height: 70%;
+        height: 65%;
     }
 
     #params {
@@ -23,7 +22,7 @@ class CenterApp(App):
         text-align: center;
         content-align: center middle;
         width: 100%;
-        height: 30%;
+        height: 25%;
     }
     """
 
