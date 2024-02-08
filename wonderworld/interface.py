@@ -1,6 +1,8 @@
 from textual.app import App, ComposeResult
 from textual.widgets import Static
 
+DISPLAY_MAP = "    *  X  *   "
+
 class GameApp(App):
     """Wonderworld game interface."""
 
