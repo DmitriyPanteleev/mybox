@@ -4,7 +4,7 @@ from textual.widgets import Static
 class GameApp(App):
     """Wonderworld game interface."""
 
-    CSS_PATH = "interface.css"
+    CSS_PATH = "interface.tcss"
 
     def compose(self) -> ComposeResult:
         mapscreen = Static(id="map")
