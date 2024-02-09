@@ -6,21 +6,13 @@ DISPLAY_PARAMS = "Health: 100\nMana: 100\nStamina: 100"
 
 class GameApp(App):
     """Wonderworld game interface."""
+
     def __init__(self):
-        self.map = [[' ' for _ in range(5)] for _ in range(5)]
-        self.hero_x = 0
-        self.hero_y = 0
+        super().__init__()
+        self.title = "Wonderworld"
+        self.hero_coord_x = 0
+        self.hero_coord_y = 0
 
-    def place_hero(self, x, y):
-        self.map[self.hero_y][self.hero_x] = ' '
-        self.hero_x = x
-        self.hero_y = y
-        self.map[self.hero_y][self.hero_x] = 'X'
-
-    def generate_display_map(self):
-            for row in self.map:
-                s = s + ''.join(row)
-    
     def compose(self) -> ComposeResult:
         self.widget1 = Static(DISPLAY_MAP)
         yield self.widget1
