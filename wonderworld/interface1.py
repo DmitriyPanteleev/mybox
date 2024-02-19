@@ -5,6 +5,9 @@ from textual.widgets import Input
 
 class Map(Widget):
     """Generates a greeting."""
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.border_title = "Map"
 
     map = reactive("   X    ", layout=True)
 
@@ -13,6 +16,9 @@ class Map(Widget):
 
 class Parameters(Widget):
     """Generates a greeting."""
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.border_title = "Parameters"
 
     params = reactive("Health: 100\nMana: 100\nStamina: 100", layout=True)
 
@@ -23,11 +29,7 @@ class GameApp(App):
     CSS_PATH = "interface1.tcss"
 
     def compose(self) -> ComposeResult:
-        Map.id = "Map"
-        Map.border_title = "Map"
         yield Map()
-        Parameters.id = "Parameters"
-        Parameters.border_title = "Parameters"
         yield Parameters()
 
     def on_key(self, event) -> None:
