@@ -9,7 +9,20 @@ class Map(Widget):
         super().__init__(*args, **kwargs)
         self.border_title = "Map"
 
-    map = reactive("   X    ", layout=True)
+    map_string = "              X               "
+    map = reactive(map_string, layout=True)
+
+    def step_left(self):
+        # Find the index of the X and move it one to the left
+        x = self.map_string.index("X")
+        if x > 0:
+            self.map_string = self.map_string[:x - 1] + "X" + self.map_string[x:]
+
+    def step_right(self):
+        # Find the index of the X and move it one to the right
+        x = self.map_string.index("X")
+        if x < len(self.map_string) - 1:
+            self.map_string = self.map_string[:x] + "X" + self.map_string[x + 1:]
 
     def render(self) -> str:
         return f"{self.map}"
@@ -34,9 +47,9 @@ class GameApp(App):
 
     def on_key(self, event) -> None:
         if event.key == "a":
-            self.query_one(Map).map = "  X     "
+            self.query_one(Map).map_string = "  X     "
         if event.key == "s":
-            self.query_one(Map).map = "    X   "
+            self.query_one(Map).map_string = "    X   "
         if event.key == "q":
             self.exit()
 
