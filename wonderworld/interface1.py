@@ -23,8 +23,10 @@ class GameApp(App):
     CSS_PATH = "interface1.tcss"
 
     def compose(self) -> ComposeResult:
+        Map.id = "Map"
         Map.border_title = "Map"
         yield Map()
+        Parameters.id = "Parameters"
         Parameters.border_title = "Parameters"
         yield Parameters()
 
