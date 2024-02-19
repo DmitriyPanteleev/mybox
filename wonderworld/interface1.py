@@ -47,9 +47,9 @@ class GameApp(App):
 
     def on_key(self, event) -> None:
         if event.key == "a":
-            self.query_one(Map).map_string = "  X     "
+            self.query_one(Map).step_left()
         if event.key == "s":
-            self.query_one(Map).map_string = "    X   "
+            self.query_one(Map).step_right()
         if event.key == "q":
             self.exit()
 
