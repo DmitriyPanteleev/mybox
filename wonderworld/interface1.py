@@ -9,22 +9,14 @@ class Map(Widget):
         super().__init__(*args, **kwargs)
         self.border_title = "Map"
 
-    map_string = "          X             "
-    map = reactive(map_string, layout=True)
+    map_string = "press key"
+    map = reactive(map_string, layout=False, repaint=True, always_update=True)
 
     def step_left(self):
-        # Find the index of the X and move it one to the left
-        x = self.map_string.index("X")
-        if x > 0:
-            self.map_string = self.map_string[:x - 1] + "X" + self.map_string[x:]
-        self.map = reactive(self.map_string, layout=True)
+        self.map_string = "a pressed"
 
     def step_right(self):
-        # Find the index of the X and move it one to the right
-        x = self.map_string.index("X")
-        if x < len(self.map_string) - 1:
-            self.map_string = self.map_string[:x] + "X" + self.map_string[x + 1:]
-        self.map = reactive(self.map_string, layout=True)
+        self.map_string = "d pressed"
 
     def render(self) -> str:
         return f"{self.map}"
