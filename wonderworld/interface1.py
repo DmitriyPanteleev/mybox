@@ -10,13 +10,23 @@ class Map(Widget):
         self.border_title = "Map"
 
     map_string = "press key"
-    map = reactive(map_string, layout=False, repaint=True, always_update=True)
+    map = reactive(map_string)
 
     def step_left(self):
         self.map_string = "a pressed"
+        self.map = self.map_string
 
     def step_right(self):
         self.map_string = "d pressed"
+        self.map = self.map_string
+
+    def step_up(self):
+        self.map_string = "w pressed"
+        self.map = self.map_string
+    
+    def step_down(self):
+        self.map_string = "s pressed"
+        self.map = self.map_string
 
     def render(self) -> str:
         return f"{self.map}"
