@@ -16,7 +16,7 @@ def collatz(n):
         print(f"iterration {i} : {n}")
     
     print(f"Total iterration: {i}")
-    print(f"Max of sequence: {max}")
+    print(f"Max member of sequence: {max}")
 
 
 num = int(input("Enter the number: "))
