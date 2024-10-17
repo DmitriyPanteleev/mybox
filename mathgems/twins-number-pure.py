@@ -16,5 +16,8 @@ def find_twin_primes(n):
             twin_primes.append((i, i + 2))
     return twin_primes
 
+# How far can we go?
+limit = int(input("Enter the upper limit: "))
+
 # Test the function
-print(find_twin_primes(30))
+print(find_twin_primes(limit))
