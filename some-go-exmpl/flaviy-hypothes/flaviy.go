@@ -10,9 +10,9 @@ var b []int
 
 func main() {
 	// Set parameters
-	fmt.Println("Enter number of persons:")
+	fmt.Print("Enter number of persons: ")
 	fmt.Scan(&n)
-	fmt.Println("Enter scale number:")
+	fmt.Print("Enter scale number: ")
 	fmt.Scan(&k)
 
 	// Create array of persons
@@ -20,7 +20,7 @@ func main() {
 	for i := 0; i < n; i++ {
 		a[i] = i + 1
 	}
-	fmt.Println("Persons in circle:", a)
+	fmt.Println("Persons in circle: ", a)
 
 	// Find calculated person
 	i = 0
@@ -31,6 +31,6 @@ func main() {
 		b = append(b, elem)
 	}
 	b = append(b, a[0])
-	fmt.Println("Persons in order:", b)
+	fmt.Println("Persons in order: ", b)
 
 }
